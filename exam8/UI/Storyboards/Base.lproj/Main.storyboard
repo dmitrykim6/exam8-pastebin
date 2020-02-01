@@ -51,7 +51,7 @@
                     <navigationItem key="navigationItem" id="Igf-hz-4If">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Send" id="dt4-rk-LGm">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="showDetail" identifier="toSendController" id="V6d-n6-0Z2"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="toSendController" id="V6d-n6-0Z2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -69,24 +69,48 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SendViewController" customModule="exam8" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ny6-1m-tGG">
-                                <rect key="frame" x="189" y="698" width="36" height="30"/>
+                                <rect key="frame" x="189" y="752" width="36" height="30"/>
                                 <state key="normal" title="Send"/>
                                 <connections>
                                     <action selector="tapButtonSend:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z4h-wP-zYM"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="DnC-Ta-bYc">
+                                <rect key="frame" x="188.5" y="456.5" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gn-rZ-43X">
+                                <rect key="frame" x="0.0" y="176" width="414" height="162"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0bi-ff-U5R">
+                                <rect key="frame" x="20" y="168" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="DnC-Ta-bYc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4AX-Sx-Bz5"/>
+                            <constraint firstItem="DnC-Ta-bYc" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="DKE-Dk-I1a"/>
+                            <constraint firstItem="0bi-ff-U5R" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="Ekr-Wr-zYD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0bi-ff-U5R" secondAttribute="trailing" constant="20" id="MTB-cQ-eoG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ny6-1m-tGG" secondAttribute="bottom" constant="80" id="O5i-Oi-IbA"/>
                             <constraint firstItem="Ny6-1m-tGG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Rp3-KR-1P1"/>
+                            <constraint firstItem="0bi-ff-U5R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Zhx-tx-wKm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="95x-Bc-P2Z"/>
+                    <connections>
+                        <outlet property="sendButton" destination="Ny6-1m-tGG" id="XW6-z6-tEK"/>
+                        <outlet property="spinner" destination="DnC-Ta-bYc" id="Rew-Gs-P1b"/>
+                        <outlet property="timeIntervalPicker" destination="2gn-rZ-43X" id="zJq-XZ-KJU"/>
+                        <outlet property="titleLabel" destination="0bi-ff-U5R" id="PlT-2r-o9D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

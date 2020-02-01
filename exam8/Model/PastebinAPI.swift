@@ -15,12 +15,14 @@ enum PostResult{
 }
 
 enum MyError: Error{
-    case otherError
+    case requestError
 }
 
 class PastebinAPI: Alamofire.SessionManager {
-    static let apiKey = "7859691892dee13cf769f7c979e2d13e"
+//    static let apiKey = "7859691892dee13cf769f7c979e2d13e"
+    static let apiKey = "f0fee6a899f960bd46730fe44e47125d"
     static let shared = PastebinAPI()
+    var expData = "1H"
     
     let pasteBinUrl = "https://pastebin.com/api/api_post.php"
     
@@ -38,18 +40,22 @@ class PastebinAPI: Alamofire.SessionManager {
     let api_paste_name_head = "api_paste_name" //имя поста
     let api_paste_format_head = "api_paste_format" //формат текста
     let api_paste_private_head = "api_paste_private" //0 – публичный, 1 – unlisted, 2 – приватный.
-    let api_paste_expire_date_head = "api_paste_expire_date"  //отвечает за время жизни поста, допустимы следующие значения: N, 10M, 1H, 1D, 1W, 2W, 1M, 6M, 1Y.
-                                                                //В тестовых целях используйте значение 1H.
+    let api_paste_expire_date_head = "api_paste_expire_date"  //отвечает за время жизни поста, допустимы следующие значения: N, 10M, 1H, 1D, 1W, 2W, 1M, 6M, 1Y. В тестовых целях используйте значение 1H.
     
 
     
-    func sendText(_ text: String,  completion: @escaping (_ result: PostResult) -> Void) {
+    func sendText(_ text: String, title: String?, expDate: String, completion: @escaping (_ result: PostResult) -> Void) {
         
         requestParameters = [
             api_dev_key_head: PastebinAPI.apiKey,
             api_option_head: "paste",
-            api_paste_code_head: text
+            api_paste_code_head: text,
+            api_paste_expire_date_head: expDate
         ]
+        
+        if let t = title {
+            requestParameters[api_paste_name_head] = t
+        }
         
         self.request(
             pasteBinUrl,
@@ -68,18 +74,14 @@ class PastebinAPI: Alamofire.SessionManager {
                         completion(.success(requestUrl))
                     }
                     else {
-                        completion(.failure(MyError.otherError))
+                        completion(.failure(MyError.requestError))
                     }
                     
                 }
                 
-                
-                
-                
             })
-            .responseData { (data) in
-                
-        }
+        
+//        print(requestParameters)
         
     }
     
