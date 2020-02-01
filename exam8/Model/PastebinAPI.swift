@@ -9,9 +9,14 @@
 import Foundation
 import Alamofire
 
-//application/x-www-form-urlencoded
-//Content-Type: application/x-www-form-urlencoded
-//Accept: text/html
+enum PostResult{
+    case success(URL)
+    case failure(Error)
+}
+
+enum MyError: Error{
+    case otherError
+}
 
 class PastebinAPI: Alamofire.SessionManager {
     static let apiKey = "7859691892dee13cf769f7c979e2d13e"
@@ -23,36 +28,59 @@ class PastebinAPI: Alamofire.SessionManager {
     "Content-Type": "application/x-www-form-urlencoded",
     "Accept": "text/html"]
     
-    let api_dev_key_head = "$api_dev_key=" //ключ авторизации приложения
-    let api_option_head = "$api_option=" //действие. Для создания поста отправляйте post
-    let api_paste_code_head = "$api_paste_code=" //текст, который вы хотите сохранить
+    var requestParameters: [String:String] = [:]
     
-    let api_user_key_head = "$api_user_key=" //ключ авторизации пользователя
-    let api_paste_name_head = "$api_paste_name=" //имя поста
-    let api_paste_format_head = "$api_paste_format=" //формат текста
-    let api_paste_private_head = "$api_paste_private=" //0 – публичный, 1 – unlisted, 2 – приватный.
-    let api_paste_expire_date_head = "$api_paste_expire_date="  //отвечает за время жизни поста, допустимы следующие значения: N, 10M, 1H, 1D, 1W, 2W, 1M, 6M, 1Y.
+    let api_dev_key_head = "api_dev_key" //ключ авторизации приложения
+    let api_option_head = "api_option" //действие. Для создания поста отправляйте post
+    let api_paste_code_head = "api_paste_code" //текст, который вы хотите сохранить
+    
+    let api_user_key_head = "api_user_key" //ключ авторизации пользователя
+    let api_paste_name_head = "api_paste_name" //имя поста
+    let api_paste_format_head = "api_paste_format" //формат текста
+    let api_paste_private_head = "api_paste_private" //0 – публичный, 1 – unlisted, 2 – приватный.
+    let api_paste_expire_date_head = "api_paste_expire_date"  //отвечает за время жизни поста, допустимы следующие значения: N, 10M, 1H, 1D, 1W, 2W, 1M, 6M, 1Y.
                                                                 //В тестовых целях используйте значение 1H.
     
 
     
-    func sendText(_ text: String?) {
+    func sendText(_ text: String,  completion: @escaping (_ result: PostResult) -> Void) {
         
+        requestParameters = [
+            api_dev_key_head: PastebinAPI.apiKey,
+            api_option_head: "paste",
+            api_paste_code_head: text
+        ]
         
-        if let textToSend = text,
-            textToSend.count > 0 {
-
-            Alamofire.request(
-                pasteBinUrl,
-                method: .post,
-                parameters: [:],
-                encoding: URLEncoding(),
-                headers: header
-            ).responseData { (data) in
-                print(data.response)
-            }
-            
+        self.request(
+            pasteBinUrl,
+            method: .post,
+            parameters: requestParameters,
+            encoding: URLEncoding.default,
+            headers: header
+        )
+            .validate()
+            .responseString(completionHandler: { (response) in
+                
+                
+                if let str = response.value {
+                    
+                    if let requestUrl = URL(string: str) {
+                        completion(.success(requestUrl))
+                    }
+                    else {
+                        completion(.failure(MyError.otherError))
+                    }
+                    
+                }
+                
+                
+                
+                
+            })
+            .responseData { (data) in
+                
         }
+        
     }
     
 }

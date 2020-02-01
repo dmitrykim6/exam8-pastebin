@@ -11,7 +11,19 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBAction func tapButtonSend(_ sender: UIButton) {
-        PastebinAPI.shared.sendText("test")
+//        PastebinAPI.shared.sendText("Test just some rsdcsdcdsandscscsecesdom text you") { () in
+//            print("Booo")
+//        }
+        
+        PastebinAPI.shared.sendText("klsjadbvlkjabvar") { (result) in
+            
+            switch result {
+            case .success(let url): print(url)
+            case .failure(let err): print(err)
+            }
+            
+            
+        }
         
     }
     
