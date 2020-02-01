@@ -9,7 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBAction func tapButtonSend(_ sender: UIButton) {
+        PastebinAPI.shared.sendText("test")
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

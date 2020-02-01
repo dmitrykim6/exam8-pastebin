@@ -1,0 +1,58 @@
+//
+//  File.swift
+//  exam8
+//
+//  Created by Dmitry on 01/02/2020.
+//  Copyright © 2020 Dmitry. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+
+//application/x-www-form-urlencoded
+//Content-Type: application/x-www-form-urlencoded
+//Accept: text/html
+
+class PastebinAPI: Alamofire.SessionManager {
+    static let apiKey = "7859691892dee13cf769f7c979e2d13e"
+    static let shared = PastebinAPI()
+    
+    let pasteBinUrl = "https://pastebin.com/api/api_post.php"
+    
+    let header = [
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Accept": "text/html"]
+    
+    let api_dev_key_head = "$api_dev_key=" //ключ авторизации приложения
+    let api_option_head = "$api_option=" //действие. Для создания поста отправляйте post
+    let api_paste_code_head = "$api_paste_code=" //текст, который вы хотите сохранить
+    
+    let api_user_key_head = "$api_user_key=" //ключ авторизации пользователя
+    let api_paste_name_head = "$api_paste_name=" //имя поста
+    let api_paste_format_head = "$api_paste_format=" //формат текста
+    let api_paste_private_head = "$api_paste_private=" //0 – публичный, 1 – unlisted, 2 – приватный.
+    let api_paste_expire_date_head = "$api_paste_expire_date="  //отвечает за время жизни поста, допустимы следующие значения: N, 10M, 1H, 1D, 1W, 2W, 1M, 6M, 1Y.
+                                                                //В тестовых целях используйте значение 1H.
+    
+
+    
+    func sendText(_ text: String?) {
+        
+        
+        if let textToSend = text,
+            textToSend.count > 0 {
+
+            Alamofire.request(
+                pasteBinUrl,
+                method: .post,
+                parameters: [:],
+                encoding: URLEncoding(),
+                headers: header
+            ).responseData { (data) in
+                print(data.response)
+            }
+            
+        }
+    }
+    
+}
