@@ -91,21 +91,31 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-AC-lRs">
+                                <rect key="frame" x="20" y="652" width="374" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="DnC-Ta-bYc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="4AX-Sx-Bz5"/>
                             <constraint firstItem="DnC-Ta-bYc" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="DKE-Dk-I1a"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3QK-AC-lRs" secondAttribute="trailing" constant="20" id="Dpu-ii-mV4"/>
                             <constraint firstItem="0bi-ff-U5R" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="Ekr-Wr-zYD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0bi-ff-U5R" secondAttribute="trailing" constant="20" id="MTB-cQ-eoG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ny6-1m-tGG" secondAttribute="bottom" constant="80" id="O5i-Oi-IbA"/>
                             <constraint firstItem="Ny6-1m-tGG" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Rp3-KR-1P1"/>
                             <constraint firstItem="0bi-ff-U5R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Zhx-tx-wKm"/>
+                            <constraint firstItem="3QK-AC-lRs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="e5K-ih-dgB"/>
+                            <constraint firstItem="Ny6-1m-tGG" firstAttribute="top" secondItem="3QK-AC-lRs" secondAttribute="bottom" constant="100" id="gZR-sw-AJ1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="95x-Bc-P2Z"/>
                     <connections>
+                        <outlet property="correctAnswer" destination="3QK-AC-lRs" id="Ord-dP-3Q8"/>
                         <outlet property="sendButton" destination="Ny6-1m-tGG" id="XW6-z6-tEK"/>
                         <outlet property="spinner" destination="DnC-Ta-bYc" id="Rew-Gs-P1b"/>
                         <outlet property="timeIntervalPicker" destination="2gn-rZ-43X" id="zJq-XZ-KJU"/>

@@ -19,6 +19,7 @@ class SendViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var timeIntervalPicker: UIPickerView!
+    @IBOutlet weak var correctAnswer: UILabel!
     
     @IBAction func tapButtonSend(_ sender: UIButton) {
         
@@ -37,12 +38,14 @@ class SendViewController: UIViewController {
                 }
                 
                 switch result {
-                case .success(let url): print(url)
+                case .success(let url):
+                    print(url)
+                    self.correctAnswer.text = "https://pastebin.com\(url.path)"
+                    
                 case .failure(let err): print(err)
                 }
                 
             }
-            
             
         }
         

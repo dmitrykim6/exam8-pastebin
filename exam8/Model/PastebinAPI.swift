@@ -42,8 +42,6 @@ class PastebinAPI: Alamofire.SessionManager {
     let api_paste_private_head = "api_paste_private" //0 – публичный, 1 – unlisted, 2 – приватный.
     let api_paste_expire_date_head = "api_paste_expire_date"  //отвечает за время жизни поста, допустимы следующие значения: N, 10M, 1H, 1D, 1W, 2W, 1M, 6M, 1Y. В тестовых целях используйте значение 1H.
     
-
-    
     func sendText(_ text: String, title: String?, expDate: String, completion: @escaping (_ result: PostResult) -> Void) {
         
         requestParameters = [
@@ -66,7 +64,6 @@ class PastebinAPI: Alamofire.SessionManager {
         )
             .validate()
             .responseString(completionHandler: { (response) in
-                
                 
                 if let str = response.value {
                     

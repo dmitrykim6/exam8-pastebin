@@ -42,12 +42,3 @@ class EditorViewController: UIViewController, UITextViewDelegate{
     
 }
 
-
-//extension EditorViewController: UITextViewDelegate {
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        textView.delegate = self
-//    }
-//
-//}
